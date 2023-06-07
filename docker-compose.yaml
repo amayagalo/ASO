@@ -1,0 +1,29 @@
+version: "3.2"
+
+services:
+
+  mysql:
+    image: mariadb
+    container_name: mysql
+    hostname: mysql
+    volumes:
+      - ./mysql:/var/lib/mysql
+    env_file:
+      - ./mysql.env
+    restart: unless-stopped
+
+
+  glpi:
+    image: diouxx/glpi
+    container_name : glpi
+    hostname: glpi
+    environment:
+      - version=10.0.4
+    ports:
+      - "8000:80"
+    volumes:
+
+      - ./glpi/:/var/www/html/glpi
+    restart: unless-stopped
+    
+    
